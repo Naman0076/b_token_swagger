@@ -1,0 +1,255 @@
+{
+    "swagger": "2.0",
+    "info": {
+      "version": "1.0.0",
+      "title": "Student Management API",
+      "description": "API for managing students including creating, viewing, editing, and deleting student records."
+    },
+    "host": "localhost:8000",
+    "basePath": "/",
+    "schemes": [
+      "http"
+    ],
+    "paths": {
+      "/": {
+        "get": {
+          "summary": "Welcome message",
+          "description": "Returns a welcome message with the user's name",
+          "responses": {
+            "200": {
+              "description": "Successful operation",
+              "schema": {
+                "type": "object",
+                "properties": {
+                  "message": {
+                    "type": "string"
+                  }
+                }
+              }
+            }
+          }
+        }
+      },
+      "/hello": {
+        "get": {
+          "summary": "Hello message",
+          "description": "Returns a hello message with the user's name",
+          "responses": {
+            "200": {
+              "description": "Successful operation",
+              "schema": {
+                "type": "object",
+                "properties": {
+                  "message": {
+                    "type": "string"
+                  }
+                }
+              }
+            }
+          }
+        }
+      },
+      "/goodbye": {
+        "get": {
+          "summary": "Goodbye message",
+          "description": "Returns a goodbye message with the user's name",
+          "responses": {
+            "200": {
+              "description": "Successful operation",
+              "schema": {
+                "type": "object",
+                "properties": {
+                  "message": {
+                    "type": "string"
+                  }
+                }
+              }
+            }
+          }
+        }
+      },
+      "/students/": {
+        "get": {
+          "summary": "Get all students",
+          "description": "Returns a list of all students",
+          "responses": {
+            "200": {
+              "description": "List of students",
+              "schema": {
+                "type": "array",
+                "items": {
+                  "$ref": "#/definitions/Student"
+                }
+              }
+            }
+          }
+        }
+      },
+      "/students/{student_id}/": {
+        "get": {
+          "summary": "Get a single student",
+          "description": "Returns details of a student by ID",
+          "parameters": [
+            {
+              "name": "student_id",
+              "in": "path",
+              "required": true,
+              "type": "integer"
+            }
+          ],
+          "responses": {
+            "200": {
+              "description": "Student found",
+              "schema": {
+                "$ref": "#/definitions/Student"
+              }
+            },
+            "404": {
+              "description": "Student not found"
+            }
+          }
+        }
+      },
+      "/{student_id}/edit/": {
+        "post": {
+          "summary": "Edit a student",
+          "description": "Edits an existing student record by ID",
+          "parameters": [
+            {
+              "name": "student_id",
+              "in": "path",
+              "required": true,
+              "type": "integer"
+            },
+            {
+              "name": "firstname",
+              "in": "formData",
+              "required": true,
+              "type": "string"
+            },
+            {
+              "name": "lastname",
+              "in": "formData",
+              "required": true,
+              "type": "string"
+            },
+            {
+              "name": "email",
+              "in": "formData",
+              "required": true,
+              "type": "string"
+            },
+            {
+              "name": "age",
+              "in": "formData",
+              "required": true,
+              "type": "integer"
+            },
+            {
+              "name": "bio",
+              "in": "formData",
+              "required": true,
+              "type": "string"
+            }
+          ],
+          "responses": {
+            "200": {
+              "description": "Student updated successfully"
+            }
+          }
+        }
+      },
+      "/{student_id}/delete/": {
+        "post": {
+          "summary": "Delete a student",
+          "description": "Deletes a student by ID",
+          "parameters": [
+            {
+              "name": "student_id",
+              "in": "path",
+              "required": true,
+              "type": "integer"
+            }
+          ],
+          "responses": {
+            "200": {
+              "description": "Student deleted successfully"
+            },
+            "404": {
+              "description": "Student not found"
+            }
+          }
+        }
+      },
+      "/create/": {
+        "post": {
+          "summary": "Create a student",
+          "description": "Creates a new student record",
+          "parameters": [
+            {
+              "name": "firstname",
+              "in": "formData",
+              "required": true,
+              "type": "string"
+            },
+            {
+              "name": "lastname",
+              "in": "formData",
+              "required": true,
+              "type": "string"
+            },
+            {
+              "name": "email",
+              "in": "formData",
+              "required": true,
+              "type": "string"
+            },
+            {
+              "name": "age",
+              "in": "formData",
+              "required": true,
+              "type": "integer"
+            },
+            {
+              "name": "bio",
+              "in": "formData",
+              "required": true,
+              "type": "string"
+            }
+          ],
+          "responses": {
+            "201": {
+              "description": "Student created successfully"
+            }
+          }
+        }
+      }
+    },
+    "definitions": {
+      "Student": {
+        "type": "object",
+        "properties": {
+          "id": {
+            "type": "integer"
+          },
+          "firstname": {
+            "type": "string"
+          },
+          "lastname": {
+            "type": "string"
+          },
+          "email": {
+            "type": "string"
+          },
+          "age": {
+            "type": "integer"
+          },
+          "bio": {
+            "type": "string"
+          }
+        }
+      }
+    }
+  }
+   
+   
